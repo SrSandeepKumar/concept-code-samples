@@ -1,6 +1,12 @@
 /**
+ * Reference: http://dealwithjs.io/es6-features-10-use-cases-for-proxy/
  * 
- * @param {*} ttlFunc 
+ * 
+ */
+
+/**
+ * Function to set TTL for the value being stored in Object
+ * @param {function} ttlFunc 
  */
 
 function cacheObj(ttlFunc) {
