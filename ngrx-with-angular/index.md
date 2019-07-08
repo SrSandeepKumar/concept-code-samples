@@ -1,4 +1,4 @@
-# ngrx with Angular project.
+# ngrx with Angular project (v6).
 
 ## I had a chance to work on an Angular project, from previously being reactjs developer - this has given great amount of learning
 
@@ -65,5 +65,159 @@ export class PersonEffects {
 }
 
 ```
+
+### store/reducer/person.reducer.ts
+```typescript
+import * as fromPerson from "../actions";
+
+export interface PersonState {
+  fullName: string,
+  Age: number
+};
+
+export const initialState: PersonState = {
+  fullName: null,
+  age: null
+};
+
+export function reducer (
+  state = initalState,
+  action: fromPerson.PersonActions
+):PersonState  {
+  switch(action.type) {
+    case: fromPerson.FETCH_PERSON_INFO_SUCCESS:
+      return {...state, ...action.data};
+    default: return state;
+  }
+};
+
+export const getPersonFullname = (state: PersonState) => state.fullName;
+
+```
+
+
+### store/reducer/index.ts
+```typescript
+import {ActionReducerMap, createSelector, createFeatureSelector} from '@ngrx/store';
+import * as fromPerson from "./reducer/person.reducer";
+
+export interface GlobalState {
+  person: fromPerson.PersonState,
+  ...
+};
+
+export const reducers: ActionReducerMap<GlobalState> = {
+  person: fromPerson.reducer,
+  ...
+};
+
+export const getPersonReducerState = createFeatureSelector<GlobalState>("person");
+
+export const getPersonState = createSelector(
+  getPersonReducerState,
+  (state: GlobalState) => state.person
+);
+
+export const getPersonFullName = createSelector(getPersonState, fromPerson.getPersonFullname);
+
+```
+
+### app.module.ts
+```typescript
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { effects } from './store';
+
+....
+
+@NgModule({
+  imports:[
+    ...
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot(effects),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: true,
+    })
+    ...
+  ]
+});
+
+export class AppModule {}
+
+```
+
+### person.component.ts
+```typescript
+import { Component, OnInit } from '@angular/core';
+import {Store} from "@ngrx/store";
+
+import * as fromStore from "../../store";
+
+@Component({
+  selector: 'person',
+  templateUrl: './person.component.html',
+  styleUrls: ['./person.component.css']
+})
+export class PersonComponent implements OnInit {
+  
+  constructor(
+    private store: Store<fromStore.PersonActions>,
+  ) {}
+  
+  ngOnInit() {
+    this.store.dispatch(new fromStore.fetchPersonDetails());
+    this.personDetails$ = this.store.select(fromStore.getPersonFullName);
+    this.personDetails$.subscribe((data) => {
+      this.personFullname = data;
+    });
+  }
+
+  ...
+
+}
+
+```
+
+### person.component.html
+```html
+<div>{{personFullName | async}}</div>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
