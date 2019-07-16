@@ -1,7 +1,8 @@
 /**
  * Reference: http://dealwithjs.io/es6-features-10-use-cases-for-proxy/
- * 
- * 
+ * 1. With Proxy we can control the value we store in Object, useful when we want to store meta data
+ * 2. Below example we put a TTL based on the real value, so when we set the value cache.a = 42, instead of 42 we store {ttl: 30, value: 42}
+ * 3. Then we decrease the ttl every second and when it reaches 0, remove the property.
  */
 
 /**
