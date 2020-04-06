@@ -7,5 +7,5 @@
 3. Ngrx with Angular [Link](https://github.com/SrSandeepKumar/concept-code-samples/blob/master/ngrx-with-angular)
 
 #### Links 
-1. Understanding Reflow & Repaint [Link](https://medium.com/darrja-%E0%A4%A6%E0%A4%B0%E0%A5%8D%E0%A4%9C%E0%A4%BE/what-the-heck-is-repaint-and-reflow-in-the-browser-b2d0fb980c08)
-2. CSS Box Model [Link](https://www.w3.org/TR/CSS2/box.html#box-dimensions)
+1. [Understanding Reflow & Repaint](https://medium.com/darrja-%E0%A4%A6%E0%A4%B0%E0%A5%8D%E0%A4%9C%E0%A4%BE/what-the-heck-is-repaint-and-reflow-in-the-browser-b2d0fb980c08)
+2. [CSS Box Model](https://www.w3.org/TR/CSS2/box.html#box-dimensions)
